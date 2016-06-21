@@ -1,0 +1,101 @@
+@import 'utils/reset';
+@import 'utils/colors';
+
+html {
+  font-size: 62.5%;
+}
+
+.app {
+  background-color: $body-bg-color;
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+  color: $text-primary-color;
+  background-color: $body-bg-color;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border-bottom: 2px solid rgba(black, 0);
+}
+
+a:hover {
+  color: rgba(black, .82);
+  transition: all 150ms;
+}
+
+.navbar {
+  height: 4.8rem;
+  background: white;
+}
+
+.post-list {
+  max-width: 90rem;
+  margin: auto;
+}
+
+.post-list__header {
+  padding: 1.6rem;
+}
+
+.post {
+  display: flex;
+  padding: .8rem .4rem;
+}
+
+.post:not(:last-child) {
+  border-bottom: 1px solid rgba(black, .08);
+}
+
+
+[class*='post__meta'] {
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.post__meta {
+  &-score {
+    justify-content: center;
+    padding: .8rem;
+    min-width: 6.4rem;
+    color: $text-disabled-color;
+  }
+  &-title {
+    width: 100%;
+    padding-right: 3.2rem;
+  }
+  &-timestamp {
+    white-space:nowrap;
+    padding: 0rem .8rem;
+    min-width: 12rem;
+    justify-content: flex-end;
+    color: $text-disabled-color;
+  }
+}
+
+
+.more {
+  text-align: center;
+  padding: 2rem 0rem 10rem;
+}
+
+.more button {
+  outline: none;
+  background-color: transparent;
+  border: 2px solid $text-primary-color;
+  padding: .8rem 1.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.more button:hover {
+  color: white;
+  background: $text-primary-color;
+}
