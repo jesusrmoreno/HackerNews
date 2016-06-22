@@ -6,15 +6,31 @@
 html {
   font-size: 62.5%; }
 
+.container {
+  margin: auto; }
+
 .app {
-  background-color: #F6F6F6;
+  background-color: #ffffff;
   width: 100vw;
   height: 100vh; }
+
+.loader {
+  font-size: 2.4rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 300px; }
 
 body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   color: #444444;
-  background-color: #F6F6F6; }
+  background-color: #ffffff; }
 
 a {
   text-decoration: none;
@@ -27,15 +43,23 @@ a:hover {
   transition: all 150ms; }
 
 .navbar {
-  height: 4.8rem;
-  background: white; }
+  height: 9.6rem;
+  background: white;
+  margin-bottom: 2rem; }
 
-.post-list {
-  max-width: 90rem;
-  margin: auto; }
+.nav-items {
+  height: 9.6rem;
+  list-style: none;
+  line-height: 9.6rem; }
+
+.nav__title {
+  font-size: 1.6rem;
+  color: #FF6600;
+  font-weight: 400; }
 
 .post-list__header {
-  padding: 1.6rem; }
+  padding: 1.6rem 0rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
 
 .post {
   display: -webkit-flex;

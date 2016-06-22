@@ -102,6 +102,73 @@
 	  });
 	}
 
+	var Post = function Post(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { key: props.id, className: 'post' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'post__meta-index' },
+	      props.index
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'post__meta-score' },
+	      props.score
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'post__meta-title' },
+	      _react2.default.createElement(
+	        'a',
+	        { href: props.url },
+	        props.title
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'post__meta-timestamp' },
+	      _moment2.default.unix(props.time).fromNow()
+	    )
+	  );
+	};
+
+	var Container = function Container(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'container', style: { maxWidth: props.width } },
+	    props.children
+	  );
+	};
+
+	var PostList = function PostList(props) {
+	  if (props.loaded) {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      props.posts.map(function (post, index) {
+	        if (!_lodash2.default.isUndefined(post.url) && index < props.limit) {
+	          return _react2.default.createElement(Post, {
+	            key: post.id,
+	            id: post.id,
+	            index: index += 1,
+	            url: post.url,
+	            score: post.score,
+	            title: post.title,
+	            time: post.time
+	          });
+	        }
+	      })
+	    );
+	  } else {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'loader' },
+	      'Loading...'
+	    );
+	  }
+	};
+
 	var App = _react2.default.createClass({
 	  displayName: 'App',
 	  getInitialState: function getInitialState() {
@@ -119,8 +186,6 @@
 	    store.dispatch((0, _actions.loadMore)());
 	  },
 	  render: function render() {
-	    var _this2 = this;
-
 	    var posts = this.state.feed.posts;
 	    return _react2.default.createElement(
 	      'div',
@@ -128,11 +193,23 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'navbar' },
-	        _react2.default.createElement('div', { className: 'nav-items' })
+	        _react2.default.createElement(
+	          Container,
+	          { width: 900 },
+	          _react2.default.createElement(
+	            'ul',
+	            { className: 'nav-items' },
+	            _react2.default.createElement(
+	              'li',
+	              { className: 'nav__title' },
+	              'Hacker News'
+	            )
+	          )
+	        )
 	      ),
 	      _react2.default.createElement(
-	        'div',
-	        { className: 'post-list' },
+	        Container,
+	        { width: 900 },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'post-list__header' },
@@ -142,39 +219,19 @@
 	            'News'
 	          )
 	        ),
-	        posts.map(function (post, index) {
-	          if (post.url !== undefined && index < _this2.state.feed.limit) {
-	            return _react2.default.createElement(
-	              'div',
-	              { key: post.id, className: 'post' },
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'post__meta-score' },
-	                post.score
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'post__meta-title' },
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: post.url },
-	                  post.title
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'post__meta-timestamp' },
-	                _moment2.default.unix(post.time).fromNow()
-	              )
-	            );
-	          }
+	        _react2.default.createElement(PostList, {
+	          posts: posts,
+	          limit: this.state.feed.limit,
+	          loaded: posts.length > 30
 	        }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'more' },
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.loadMore },
+	            { onClick: this.loadMore, style: {
+	                display: posts.length > 30 ? 'inline-block' : 'none'
+	              } },
 	            this.state.feed.limit > posts.length && posts.length > 30 ? 'END' : 'LOAD MORE'
 	          )
 	        )
